@@ -1,24 +1,25 @@
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 3.30) # VS 18 ships with newer CMake
 
-project(FastVulkan)
+project(FastVulkan LANGUAGES CXX)
 
-# Redirect all build output to build folder
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/lib")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/lib")
-
-# Redirect CMake generated files to build folder
-set(CMAKE_BINARY_DIR "${PROJECT_SOURCE_DIR}/build" CACHE INTERNAL "Build directory" FORCE)
-
-# Set C++ standard to latest draft
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(FastVulkan)
 
-target_sources(FastVulkan
-    PRIVATE
-        src/Core/Logging/Log.ixx
-        src/Application.cpp
+target_sources(FastVulkan PRIVATE
+    src/Application.cpp
+    src/Core/Logging/Log.ixx
 )
+
+# Output layout Visual Studio expects
+set_target_properties(FastVulkan PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>"
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/$<CONFIG>"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/$<CONFIG>"
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/bin/$<CONFIG>"
+)
+
+# MUST be after add_executable
+set_property(DIRECTORY PROPERTY VS_STARTUP_PROJECT FastVulkan)
