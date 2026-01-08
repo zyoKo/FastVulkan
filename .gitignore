@@ -1,0 +1,71 @@
+# Build directories
+build/
+Build/
+bin/
+Bin/
+lib/
+Lib/
+obj/
+Obj/
+out/
+Out/
+
+# Visual Studio
+.vs/
+.vscode/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.slnx
+*.sln.DotSettings
+*.sln.iml
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+*.cmake
+CTestTestfile.cmake
+
+# Executables
+*.exe
+*.out
+*.app
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+
+# Object files
+*.o
+*.obj
+*.asm
+
+# Precompiled headers
+*.pch
+*.gch
+*.pdb
+*.idb
+*.ifc
+
+# IDE files
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependencies
+dependencies/
+vcpkg_installed/
+
+# Logs
+*.log
+
+# Misc
+.cache/
+.clang-format.bak
+compile_commands.json
